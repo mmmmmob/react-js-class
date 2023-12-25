@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import "./App.css";
 
@@ -16,22 +17,22 @@ const RunningForm = () => {
   return (
     <div>
       <form id="data-form">
-        <label for="name">Name:</label>
+        <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" />
         <br />
         <br />
 
-        <label for="age">Age:</label>
+        <label htmlFor="age">Age:</label>
         <input type="number" id="age" name="age" />
         <br />
         <br />
 
-        <label for="weight">Weight:</label>
+        <label htmlFor="weight">Weight:</label>
         <input type="number" id="weight" name="weight" />
         <br />
         <br />
 
-        <label for="running">Current Running (Minutes):</label>
+        <label htmlFor="running">Current Running (Minutes):</label>
         <input type="number" id="running" name="running" />
         <br />
         <br />
