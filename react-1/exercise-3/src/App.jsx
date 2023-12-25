@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import "../src/assets/style.css";
 import "./App.css";
@@ -41,6 +42,7 @@ const FormGroup = () => {
 const DisplayMember = () => {
   let johnDoe = "John Doe (john@example.com)";
   let janeSmith = "Jane Smith (jane@example.com)";
+  // or set an array for our data
   return (
     <div className="members">
       <h2>Registered Members</h2>
