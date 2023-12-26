@@ -1,23 +1,24 @@
+import React from "react";
 import "./App.css";
 
 function App() {
-  const members = [
+  const runnerMembers = [
     {
-      name: "Mock J",
+      name: "Cornelia Klein",
       age: 99,
       weight: 66,
       running: 40,
       status: "Balance",
     },
     {
-      name: "Mean Mock",
+      name: "Aiden Dunn",
       age: 55,
       weight: 64,
       running: 70,
       status: "Extreme",
     },
     {
-      name: "Mock J",
+      name: "Rena Delgado",
       age: 2,
       weight: 8,
       running: 12,
@@ -25,11 +26,35 @@ function App() {
     },
   ];
 
+  const runnerMembersTwo = [
+    {
+      name: "Minnie Castillo",
+      age: 11,
+      weight: 48,
+      running: 56,
+      status: "Balance",
+    },
+    {
+      name: "MeaCarlos Yates",
+      age: 24,
+      weight: 60,
+      running: 44,
+      status: "Extreme",
+    },
+    {
+      name: "Emma Hines",
+      age: 32,
+      weight: 21,
+      running: 33,
+      status: "Moderate",
+    },
+  ];
+
   return (
     <div id="app">
       <h1>Enter Data</h1>
       <RunningForm />
-      <TableDisplay data={members} />
+      <TableDisplay showData={runnerMembers} showExtraData={runnerMembersTwo} />
     </div>
   );
 }
@@ -62,9 +87,11 @@ const RunningForm = () => {
   );
 };
 
-const TableDisplay = () => {
+const TableDisplay = (props) => {
+  const detailsData = props.showData;
+  const detailsMoreData = props.showExtraData;
   return (
-    <>
+    <div>
       <h1>Entered Data</h1>
       <table id="data-table" border="1" width="100%">
         <thead>
@@ -76,16 +103,41 @@ const TableDisplay = () => {
             <th>Good Running</th>
           </tr>
         </thead>
-        <TableBody />
+        <TableBody rowData={detailsData} rowAnotherData={detailsMoreData} />
       </table>
-    </>
+    </div>
   );
 };
 
-const TableBody = () => {
+const TableBody = (props) => {
+  const rowData = props.rowData;
+  const rowAnotherData = props.rowAnotherData;
   return (
-    // code here
-  )
-}
+    <tbody>
+      {rowData.map((runMember) => {
+        return (
+          <tr key={runMember.name}>
+            <td>{runMember.name}</td>
+            <td>{runMember.age}</td>
+            <td>{runMember.weight}</td>
+            <td>{runMember.running}</td>
+            <td>{runMember.status}</td>
+          </tr>
+        );
+      })}
+      {rowAnotherData.map((runMember) => {
+        return (
+          <tr key={runMember.name}>
+            <td>{runMember.name}</td>
+            <td>{runMember.age}</td>
+            <td>{runMember.weight}</td>
+            <td>{runMember.running}</td>
+            <td>{runMember.status}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  );
+};
 
 export default App;
