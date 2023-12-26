@@ -7,7 +7,7 @@ function App() {
   const removePost = (id) => {
     remove(id);
   };
-  // !! should't explicitly invoke function before using in a component. instead, make it a function with parameter (actual api method inside) which retrieve argument when invoke in a component [see ln:69].
+  // !! should't explicitly call a function before using in a component. instead, make it a function with parameter (with actual api method [ln:8] inside) which retrieve argument when call inside a component [see ln:69].
   return (
     <div id="app">
       <h1>Enter Data</h1>
