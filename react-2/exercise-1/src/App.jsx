@@ -50,6 +50,10 @@ function App() {
     },
   ];
 
+  // ** another method (deconstruction)
+  // !! const combinedMembers = [...runnerMembers, ...runnerMembersTwo]
+  // ** then parsing combinedMember to TableDisplay as one property
+
   return (
     <div id="app">
       <h1>Enter Data</h1>
