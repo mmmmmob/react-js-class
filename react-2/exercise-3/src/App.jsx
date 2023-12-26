@@ -4,11 +4,14 @@ import usePost from "./hook/usePost";
 function App() {
   const { get, remove } = usePost();
   const feedData = get();
+  const removePost = (id) => {
+    remove(id);
+  };
   return (
     <div id="app">
       <h1>Enter Data</h1>
       <PostContainer />
-      <FeedSection feedData={feedData} />
+      <FeedSection feedData={feedData} removePost={removePost} />
     </div>
   );
 }
@@ -37,20 +40,24 @@ const PostContainer = () => {
   );
 };
 
-const FeedSection = ({ feedData }) => {
+const FeedSection = (props) => {
+  const feedData = props.feedData;
+  const removePost = props.removePost;
   return (
     <div className="feed">
-      <Post newData={feedData} />
+      <Post feedData={feedData} removePost={removePost} />
     </div>
   );
 };
 
-const Post = ({ newData }) => {
+const Post = (props) => {
+  const feedData = props.feedData;
+  const removePost = props.removePost;
   return (
     <div>
-      {newData.map((post) => {
+      {feedData.map((post) => {
         return (
-          <div className="post">
+          <div className="post" key={post.id}>
             <div className="post-header">
               <img src={post.avatar} alt="User 1" className="post-avatar" />
             </div>
@@ -58,8 +65,7 @@ const Post = ({ newData }) => {
             <div className="post-time">{post.time}</div>
             <div className="post-content">{post.content}</div>
             <img src={post.image} alt="Post 1" className="post-image" />
-            <div className="post-id">{post.id}</div>
-            <button>DELETE</button>
+            <button onClick={() => removePost(post.id)}>DELETE</button>
           </div>
         );
       })}
