@@ -7,6 +7,7 @@ function App() {
 
   return (
     <>
+      {/* TODO Add profile pic link add disply on screen + SNS link also */}
       <img src="https://placekitten.com/150/150" alt="avatar" />
       <input
         type="text"
