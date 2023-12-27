@@ -1,58 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const temperature = 12;
+  const [temperature, setTemperature] = useState(30);
+  // set default state value inside useState()
   return (
     <div id="app">
       <Header temp={temperature} />
       <Content tempContent={temperature} />
-      <Footer />
+      <Footer tempStatus={temperature} tempAdd={setTemperature} />
     </div>
   );
 }
 
-function Header(props) {
-  const tempInHeader = props.temp;
+function Header({ temp }) {
   return (
-    // Code for Header
-    // <Header />
     <header>
       <span>Turn on / off</span>
-      <p>Current Temperature: {tempInHeader}</p>
+      <p>Current Temperature: {temp}</p>
     </header>
   );
 }
 
-function Content(props) {
-  const tempInContent = props.tempContent;
+function Content({ tempContent }) {
   return (
-    // Code for Content
-    // <Content />
     <div>
-      <Temperature tempTemperature={tempInContent} />
+      <Temperature tempTemperature={tempContent} />
     </div>
   );
 }
 
-function Temperature(props) {
-  const tempInTemperature = props.tempTemperature;
+function Temperature({ tempTemperature }) {
   return (
-    // Code for Temperature
-    // <Temperature />
     <div id="temperature">
-      <span>{tempInTemperature} Oc</span>
+      <span>{tempTemperature} °C</span>
     </div>
   );
 }
 
-function Footer() {
+function Footer({ tempAdd, tempStatus }) {
   return (
-    // Code for Footer
-    // <Footer />
     <footer>
-      <button>Up</button>
-      <button>Down</button>
+      <button
+        onClick={() => {
+          tempAdd(tempStatus + 1);
+        }}
+      >
+        Up
+      </button>
+      <button onClick={() => tempAdd((prevTemperature) => prevTemperature - 1)}>
+        Down
+      </button>
     </footer>
   );
 }
