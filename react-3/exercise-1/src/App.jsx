@@ -1,40 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function App() {
-    // adding state here.
-
-  const handleClick = (value) => {
-    // code here.
-  };
+  const [choices, setChoice] = useState();
+  // always set state and state method
 
   return (
     <div>
-      <button>Fullname</button>
-      <button>Age</button>
-      <button>Picture</button>
-      <DisplayInfo />
+      <button onClick={() => setChoice("Fullname")}>Fullname</button>
+      <button onClick={() => setChoice("Age")}>Age</button>
+      <button onClick={() => setChoice("Picture")}>Picture</button>
+      <DisplayInfo choices={choices} />
     </div>
   );
 }
 
 function DisplayInfo(props) {
-
-  let ___;
-  if (___ === 'Fullname') {
-    ___ = <h2>John Doe</h2>;
-  } else if (___ === 'Age') {
-    ___ = <h2>30</h2>;
-  } else if (___ === 'Picture') {
-    ___ = <img src="https://via.placeholder.com/150" alt="Placeholder" />;
+  let choices = props.choices;
+  if (choices === "Fullname") {
+    choices = <h2>John Doe</h2>;
+  } else if (choices === "Age") {
+    choices = <h2>30</h2>;
+  } else if (choices === "Picture") {
+    choices = <img src="https://via.placeholder.com/150" alt="Placeholder" />;
   } else {
-    ___ = <p>Please select an option.</p>;
+    choices = <p>Please select an option.</p>;
   }
-
-  return (
-    <div>
-      {___}
-    </div>
-  );
+  return <div>{choices}</div>;
+  // return html elements from {choices} after passed conditional statement (if want to directly use as div you have to use a short-circuit writing)
 }
 
 export default App;
