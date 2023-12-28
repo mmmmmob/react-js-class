@@ -98,10 +98,13 @@ body {
   outline: none;
 }
 
+.post-id {
+  color: red;
+}
+
 .post-actions {
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -109,6 +112,7 @@ body {
   background-color: #007bff;
   color: #fff;
   padding: 8px 16px;
+  margin-right: 4px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -116,4 +120,17 @@ body {
 
 .post-button:hover {
   background-color: #0056b3;
+}
+
+.update-button {
+  background-color: #e85f10;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-button:hover {
+  background-color: #b33600;
 }

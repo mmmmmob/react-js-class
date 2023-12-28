@@ -1,7 +1,7 @@
-import usePost from "./hook/usePost";
-import { getUser } from "./hook/me";
-import "./App.css";
 import { useState } from "react";
+import "./App.css";
+import { getUser } from "./hook/me";
+import usePost from "./hook/usePost";
 
 function App() {
   const { get, remove, update, create } = usePost();
@@ -22,21 +22,41 @@ function App() {
     create(data);
   };
 
+  const updatePost = (idNew, content, image) => {
+    let id = idNew;
+    let time = new Date().toDateString(); //
+    const user = getUser();
+    const data = {
+      id: id,
+      author: user.author,
+      avatar: user.avatar,
+      time: time,
+      content: content,
+      image: image,
+    };
+    update(data);
+  };
+
   return (
     <div id="app">
       <h1>Enter Data</h1>
-      <PostContainer create={createPost} />
+      <PostContainer create={createPost} update={updatePost} />
       <FeedSection posts={posts} removeHandler={remove} />
     </div>
   );
 }
 
-const PostContainer = ({ create }) => {
+const PostContainer = ({ create, update }) => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const [idNew, setId] = useState("");
 
   const createPostInPostContainer = () => {
     create(content, image);
+  };
+
+  const updatePostInPostContainer = () => {
+    update(idNew, content, image);
   };
 
   return (
@@ -46,6 +66,11 @@ const PostContainer = ({ create }) => {
         <div className="post-author">You</div>
       </div>
       <div className="post-content">
+        <textarea
+          className="post-input"
+          placeholder="Your post ID *only for update*"
+          onChange={(ev) => setId(ev.target.value)}
+        ></textarea>
         <textarea
           className="post-input"
           placeholder="What's on your mind?"
@@ -61,6 +86,9 @@ const PostContainer = ({ create }) => {
       <div className="post-actions">
         <button className="post-button" onClick={createPostInPostContainer}>
           Post
+        </button>
+        <button className="update-button" onClick={updatePostInPostContainer}>
+          Update
         </button>
       </div>
     </div>
@@ -91,6 +119,7 @@ const Post = ({ id, author, avatar, time, content, image, removeHandler }) => {
       <div className="post-header">
         <img className="post-avatar" src={avatar} alt="User 3" />
         <div>
+          <div className="post-id">{id}</div>
           <div className="post-author">{author}</div>
           <div className="post-time">{time}</div>
         </div>
