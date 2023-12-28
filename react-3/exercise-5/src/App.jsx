@@ -22,7 +22,9 @@ function App() {
     create(data);
   };
 
+  // create updatePost fn that return all required data for update() api without taking the same author and avatar key of that post (maybe next steps?)
   const updatePost = (idNew, content, image) => {
+    // take the same ID of the post that user want to edit
     let id = idNew;
     let time = new Date().toDateString(); //
     const user = getUser();
@@ -40,6 +42,7 @@ function App() {
   return (
     <div id="app">
       <h1>Enter Data</h1>
+      {/* create props for updatePost */}
       <PostContainer create={createPost} update={updatePost} />
       <FeedSection posts={posts} removeHandler={remove} />
     </div>
@@ -49,12 +52,14 @@ function App() {
 const PostContainer = ({ create, update }) => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  // new state watcher for ID
   const [idNew, setId] = useState("");
 
   const createPostInPostContainer = () => {
     create(content, image);
   };
 
+  // create updatePost fn that take idNew and other data from field
   const updatePostInPostContainer = () => {
     update(idNew, content, image);
   };
@@ -69,6 +74,7 @@ const PostContainer = ({ create, update }) => {
         <textarea
           className="post-input"
           placeholder="Your post ID *only for update*"
+          // set newID from user input
           onChange={(ev) => setId(ev.target.value)}
         ></textarea>
         <textarea
@@ -87,6 +93,7 @@ const PostContainer = ({ create, update }) => {
         <button className="post-button" onClick={createPostInPostContainer}>
           Post
         </button>
+        {/* new button for update */}
         <button className="update-button" onClick={updatePostInPostContainer}>
           Update
         </button>
@@ -119,6 +126,7 @@ const Post = ({ id, author, avatar, time, content, image, removeHandler }) => {
       <div className="post-header">
         <img className="post-avatar" src={avatar} alt="User 3" />
         <div>
+          {/* display ID for user edit */}
           <div className="post-id">{id}</div>
           <div className="post-author">{author}</div>
           <div className="post-time">{time}</div>
