@@ -22,12 +22,15 @@ function App() {
   useEffect(() => {
     switch (btn) {
       case "fullname":
+        console.log("button clicked is", btn);
         setHtmlResult(<h1>{name}</h1>);
         break;
       case "age":
+        console.log("button clicked is", btn);
         setHtmlResult(<h1>{age}</h1>);
         break;
       case "picture":
+        console.log("button clicked is", btn);
         setHtmlResult(<img src={img} />);
         break;
       default:
