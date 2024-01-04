@@ -1,6 +1,8 @@
+// import createContext and useContext
 import { createContext, useContext } from "react";
 import "./App.css";
 
+// initially create const to store a data inside context with createContext({})
 const contextData = createContext({});
 
 function App() {
@@ -8,7 +10,9 @@ function App() {
     <div id="app">
       <h1>Enter Data</h1>
       <PostContainer />
+      {/* use tag <//context variable//.Provider> wrap around component that has to use the data */}
       <contextData.Provider
+        // add a value argument with {} and store a data inside
         value={[
           {
             author: "User 1",
@@ -40,6 +44,7 @@ function App() {
         ]}
       >
         <FeedSection />
+        {/* don't forget it's not a self-closing tag */}
       </contextData.Provider>
     </div>
   );
@@ -65,18 +70,22 @@ const PostContainer = () => {
   );
 };
 
+// no need to pass data with props anymore! yay!!
 const FeedSection = () => {
   return (
     <div className="feed">
+      {/* here the Post component is the children of FeedSection, we already send a context to mother section already so at ln:46 there's no need to put Post component there */}
       <Post />;
     </div>
   );
 };
 
 const Post = () => {
+  // inside a component you want to use context data, create a variable with function useContext() and put context variable inside parentheses
   const context = useContext(contextData);
   return (
     <div className="post">
+      {/* use it as you wish! */}
       {context.map((post) => (
         <div key={post.author} className="post">
           <div className="post-header">
