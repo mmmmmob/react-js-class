@@ -1,37 +1,94 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "./Card";
+import { useEffect, useState } from "react";
 import "./App.css";
+import Card from "./Card";
 import Form from "./Form";
 
 const App = () => {
+  // main stateVariable and stateMethod to be push and update sync with the API
   const [members, setMembers] = useState([]);
-  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
         "https://jsd5-mock-backend.onrender.com/members"
       );
-      setMembers(response.data);
+      if (response.status === 200 && response.data) {
+        setMembers([...response.data]);
+      }
     };
-
     getData();
-  }, [reload]);
+    // add [member] as an identifier to indicate react if it has been changed then GET new data
+  }, [members]);
 
-  const removeData = () => {};
+  const createData = async (name, lastname, position) => {
+    // pass three args needed for POST inside (these args being sent from <Form/> when Submit was clicked)
+    const create = await axios.post(
+      "https://jsd5-mock-backend.onrender.com/members",
+      {
+        // send args in a form as stated on API docs
+        name: name,
+        lastname: lastname,
+        position: position,
+      }
+    );
+    if (create.status === 200) {
+      // log success to indicate success status
+      console.log("Success");
+    }
+  };
+
+  const updateData = async (id, name, lastname, position) => {
+    // pass four args needed for PUT inside (these args being sent from <Form/> when Update was clicked)
+    const update = await axios.put(
+      "https://jsd5-mock-backend.onrender.com/members",
+      {
+        // send args in a form as stated on API docs
+        id: id,
+        name: name,
+        lastname: lastname,
+        position: position,
+      }
+    );
+    if (update.status === 200) {
+      // log success to indicate success status
+      console.log("Success");
+    }
+  };
+
+  const deleteData = async (id) => {
+    // pass id needed for DELETE inside (these args being sent from <Form/> when Update was clicked)
+    const update = await axios.delete(
+      `https://jsd5-mock-backend.onrender.com/member/${id}`,
+      {
+        // send arg in a form as stated on API docs
+        member_id: id,
+      }
+    );
+    if (update.status === 200) {
+      // log success to indicate success status
+      console.log("Success");
+    }
+  };
 
   return (
     <div className="container">
-      <Form submitHandler={removeData} />
+      {/* send three fuction from app.jsx to <Form/> via props */}
+      {
+        <Form
+          createData={createData}
+          updateData={updateData}
+          deleteData={deleteData}
+        />
+      }
       <div className="card-container">
         {members.map((member) => (
           <Card
-            age={member.age}
-            name={member.name}
+            key={member.id}
             id={member.id}
-            status={member.status}
-            weight={member.weight}
+            name={member.name}
+            lastname={member.lastname}
+            position={member.position}
           />
         ))}
       </div>
