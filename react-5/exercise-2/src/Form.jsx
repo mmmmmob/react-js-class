@@ -6,16 +6,6 @@ const Form = ({ createData, updateData }) => {
   const [lastname, setLastname] = useState("");
   const [position, setPosition] = useState("");
 
-  const handleSubmit = () => {
-    // Check if id is present before calling createData
-    if (id) {
-      createData(id, name, lastname, position);
-    } else {
-      // Handle the case when id is not present, or show an error message
-      console.error("ID is required for data submission.");
-    }
-  };
-
   return (
     <div>
       <input
@@ -42,7 +32,7 @@ const Form = ({ createData, updateData }) => {
         value={position}
         onChange={(ev) => setPosition(ev.target.value)}
       />
-      <button onClick={() => handleSubmit(id, name, lastname, position)}>
+      <button onClick={() => createData(name, lastname, position)}>
         Submit
       </button>
       <button onClick={() => updateData(id, name, lastname, position)}>

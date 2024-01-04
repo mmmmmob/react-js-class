@@ -21,14 +21,10 @@ const App = () => {
   }, [members]);
 
   // create here
-  const createData = async (id, name, lastname, position) => {
-    console.log(id);
-    console.log(name);
-
+  const createData = async (name, lastname, position) => {
     const create = await axios.post(
       "https://jsd5-mock-backend.onrender.com/members",
       {
-        id: id,
         name: name,
         lastname: lastname,
         position: position,
@@ -40,11 +36,24 @@ const App = () => {
   };
 
   // update here
+  const updateData = async (id, name, lastname, position) => {
+    const update = await axios.put(
+      "https://jsd5-mock-backend.onrender.com/members",
+      {
+        id: id,
+        name: name,
+        lastname: lastname,
+        position: position,
+      }
+    );
+    if (update.status === 200) {
+      console.log("Success");
+    }
+  };
 
   return (
     <div className="container">
-      {<Form createData={createData} />}
-      {/* <Form submitHandler={createData} updateHandler={updateData} /> */}
+      {<Form createData={createData} updateData={updateData} />}
       <div className="card-container">
         {members.map((member) => (
           <Card
