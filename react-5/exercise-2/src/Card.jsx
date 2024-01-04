@@ -1,4 +1,5 @@
 const Card = ({ id, name, lastname, position }) => {
+  // edit container to match dataset on API
   return (
     <div className="card">
       <div className="label">ID: {id}</div>
