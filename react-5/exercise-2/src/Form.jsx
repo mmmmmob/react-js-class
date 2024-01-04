@@ -1,10 +1,20 @@
 import { useState } from "react";
 
-const Form = ({ submitHandler }) => {
-  const [id, setId] = useState();
-  const [name, setName] = useState();
-  const [lastname, setLastname] = useState();
-  const [position, setPosition] = useState();
+const Form = ({ createData, updateData }) => {
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [position, setPosition] = useState("");
+
+  const handleSubmit = () => {
+    // Check if id is present before calling createData
+    if (id) {
+      createData(id, name, lastname, position);
+    } else {
+      // Handle the case when id is not present, or show an error message
+      console.error("ID is required for data submission.");
+    }
+  };
 
   return (
     <div>
@@ -32,8 +42,11 @@ const Form = ({ submitHandler }) => {
         value={position}
         onChange={(ev) => setPosition(ev.target.value)}
       />
-      <button onClick={() => submitHandler(id, name, lastname, position)}>
+      <button onClick={() => handleSubmit(id, name, lastname, position)}>
         Submit
+      </button>
+      <button onClick={() => updateData(id, name, lastname, position)}>
+        Update
       </button>
     </div>
   );
