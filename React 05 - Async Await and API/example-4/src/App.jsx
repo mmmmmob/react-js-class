@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "./Card";
+import { useEffect, useState } from "react";
 import "./App.css";
+import Card from "./Card";
 import Form from "./Form";
 
 const App = () => {
@@ -15,7 +15,6 @@ const App = () => {
       );
       setMembers(response.data);
     };
-
     getData();
   }, [reload]);
 
